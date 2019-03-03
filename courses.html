@@ -17,32 +17,35 @@
   <link href="css/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="css/green.css" rel="stylesheet">
-  <!-- Datatables -->
-  <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <!-- datatables -->
+  <link href="css/datatables.bootstrap.min.css" rel="stylesheet">
   <link href="css/buttons.bootstrap.min.css" rel="stylesheet">
-  <link href="css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="css/fixedheader.bootstrap.min.css" rel="stylesheet">
   <link href="css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
   <link href="css/custom.min.css" rel="stylesheet">
   <style>
-    div.dataTables_wrapper div.dataTables_filter {
-text-align: left;
-margin-top: 10px;
-}
-.dataTables_filter{
-float: left;
-}
-.center{
-text-align: center;
-}
-@media print{
-.center{
-text-align: center;
-}
-}
-</style>
+    div.datatables_wrapper div.datatables_filter {
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .datatables_filter {
+      float: left;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    @media print {
+      .center {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body class="nav-sm">
@@ -94,6 +97,7 @@ text-align: center;
                         <th class="center">القسم</th>
                         <th class="center">ايام الغياب</th>
                         <th class="center">اخر وقت لتسجيل الحضور</th>
+                        <th class="center">الحاله</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -119,39 +123,39 @@ text-align: center;
     </div>
   </div>
 
- <!-- jQuery -->
- <script src="js/external/jquery.min.js"></script>
- <!-- Bootstrap -->
- <script src="js/external/bootstrap.min.js"></script>
- <!-- FastClick -->
- <script src="js/external/fastclick.js"></script>
- <!-- NProgress -->
- <script src="js/external/nprogress.js"></script>
- <!-- iCheck -->
- <script src="js/external/icheck.js"></script>
- <!-- Datatables -->
- <script src="js/external/jquery.dataTables.min.js"></script>
- <script src="js/external/dataTables.bootstrap.min.js"></script>
- <script src="js/external/dataTables.buttons.min.js"></script>
- <script src="js/external/buttons.bootstrap.min.js"></script>
- <script src="js/external/buttons.flash.min.js"></script>
- <script src="js/external/buttons.html5.min.js"></script>
- <script src="js/external/buttons.print.min.js"></script>
- <script src="js/external/dataTables.fixedHeader.min.js"></script>
- <script src="js/external//dataTables.keyTable.min.js"></script>
- <script src="js/external/dataTables.responsive.min.js"></script>
- <script src="js/external/responsive.bootstrap.js"></script>
- <script src="js/external/dataTables.scroller.min.js"></script>
- <script src="js/external/jszip.min.js"></script>
- <script src="js/external/pdfmake.min.js"></script>
- <script src="js/external/vfs_fonts.js"></script>
+  <!-- jQuery -->
+  <script src="js/external/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/external/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="js/external/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="js/external/nprogress.js"></script>
+  <!-- iCheck -->
+  <script src="js/external/icheck.js"></script>
+  <!-- datatables -->
+  <script src="js/external/jquery.datatables.min.js"></script>
+  <script src="js/external/datatables.bootstrap.min.js"></script>
+  <script src="js/external/datatables.buttons.min.js"></script>
+  <script src="js/external/buttons.bootstrap.min.js"></script>
+  <script src="js/external/buttons.flash.min.js"></script>
+  <script src="js/external/buttons.html5.min.js"></script>
+  <script src="js/external/buttons.print.min.js"></script>
+  <script src="js/external/datatables.fixedheader.min.js"></script>
+  <script src="js/external//datatables.keytable.min.js"></script>
+  <script src="js/external/datatables.responsive.min.js"></script>
+  <script src="js/external/responsive.bootstrap.js"></script>
+  <script src="js/external/datatables.scroller.min.js"></script>
+  <script src="js/external/jszip.min.js"></script>
+  <script src="js/external/pdfmake.min.js"></script>
+  <script src="js/external/vfs_fonts.js"></script>
 
 
   <!-- Custom Theme Scripts -->
 
   <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
   <script src="js/config.js"></script>
-  <script src="js/getCourse.js"></script>
+  <script src="js/getcourse.js"></script>
   <script src="js/external/custom.min.js"></script>
 </body>
 

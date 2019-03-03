@@ -14,7 +14,8 @@ $(function () {
           '<td>' + childData.endDate + '</td>' +
           '<td>' + childData.deprt + '</td>' +
           '<td>' + childData.dayAbsance + '</td>' +
-          '<td>' + childData.lastTime + '</td></tr>'
+          '<td>' + childData.lastTime + '</td>'+
+          '<td>' + (childData.run?"فعال" : "غير فعال")+ '</td></tr>'
       });
       $("#datatable-buttons tbody").append(content)
       $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
