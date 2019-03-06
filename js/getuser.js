@@ -13,7 +13,6 @@ $(function () {
             Object.keys(insList).forEach(function(ins){
               if(ins==childData.company){
                 companyName=insList[ins].name
-                console.log(true)
               }
             })
             content += '<tr><td>' + childData.name + '</td>' +

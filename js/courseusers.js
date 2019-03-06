@@ -20,15 +20,15 @@ $(function () {
         .once("value")
         .then(function (ins) {
           insdata = ins.val()
-          console.log(ins.val())
         })
     })
   $("#sel1").change(function () {
     $("#datatable-buttons").DataTable().destroy();
-    var tabelHeader = "",
+    var
       datesList = getDates(new Date(couresList[$(this).val()].data.startDate), new Date()),
       tabelContent = "",
-      index = 1
+      index = 1,
+      courseInfo = couresList[$(this).val()]
     /* datesList.forEach(function (d) {
       tabelHeader += '<th class="center">' + d + '</th>'
     }) */
@@ -36,27 +36,26 @@ $(function () {
     firebase.database().ref("courseInfo/" + couresList[$(this).val()].key)
       .once("value")
       .then(function (s) {
-        Object.keys(s.val().attendence).forEach(function (dayKey) {
-          tabelHeader += '<th class="center">' + dayKey + '</th>'
-        })
+
         Object.keys(s.val().users).forEach(function (userKey) {
-          console.log(userKey)
           firebase.database().ref("users/" + userKey)
             .once("value")
             .then(function (userdata) {
+
               tabelContent += '<tr>' +
                 '<td>' + index + '</td>' +
                 '<td>' + userdata.val().name + '</td>' +
+                '<td>' + userdata.val().nameInEnglish + '</td>' +
+                '<td>' + courseInfo.data.name + '</td>' +
+                '<td>' + userdata.val().email + '</td>' +
+                '<td>' + userdata.val().identity + '</td>' +
+                '<td>' + userdata.val().number + '</td>' +
+                '<td>' + userdata.val().stauts + '</td>' +
                 '<td>' + insdata[userdata.val().company].name + '</td>'
-              Object.keys(s.val().attendence).forEach(function (dayKey) {
-                tabelContent += '<td>' + (s.val().attendence[dayKey][userKey] != undefined ? '<img src="' + s.val().attendence[dayKey][userKey].atteendSign +
-                  '" style="width: 75px;display:block"><p>' + s.val().attendence[dayKey][userKey].attendTime + ' </p>' : "لم يحضر") + '</td>'
-              })
               tabelContent += '</tr>'
               index++;
             }).then(function () {
               if (Object.keys(s.val().users).indexOf(userKey) == Object.keys(s.val().users).length - 1) {
-                $("#datatable-buttons thead tr").append(tabelHeader)
                 $("#datatable-buttons tbody").append(tabelContent)
                 $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
                   dom: "Blfrtip",
