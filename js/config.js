@@ -1,10 +1,10 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyBbtRxOeH4UtDS1Ei7xH2EHHcSDgJw1Gpw",
-  authDomain: "final-course.firebaseapp.com",
-  databaseURL: "https://final-course.firebaseio.com",
-  projectId: "final-course",
-  storageBucket: "final-course.appspot.com",
-  messagingSenderId: "777111402845"
+  apiKey: "AIzaSyCTyEhXlf4LHBlT1Tpczay7VSG_R66T7HQ",
+  authDomain: "coursecenter-d86ee.firebaseapp.com",
+  databaseURL: "https://coursecenter-d86ee.firebaseio.com",
+  projectId: "coursecenter-d86ee",
+  storageBucket: "coursecenter-d86ee.appspot.com",
+  messagingSenderId: "811950777253"
 };
 firebase.initializeApp(config);
