@@ -25,6 +25,9 @@ $(function () {
     })
   $("#sel1").change(function () {
     $("#datatable-buttons").DataTable().destroy();
+    $("#datatable-buttons thead tr .added").remove()
+    console.log($("#datatable-buttons thead tr .added"))
+    $("#datatable-buttons tbody").children().remove();
     var tabelHeader = "",
       datesList = getDates(new Date(couresList[$(this).val()].data.startDate), new Date()),
       tabelContent = "",
@@ -36,82 +39,91 @@ $(function () {
     firebase.database().ref("courseInfo/" + couresList[$(this).val()].key)
       .once("value")
       .then(function (s) {
-        Object.keys(s.val().attendence).forEach(function (dayKey) {
-          tabelHeader += '<th class="center">' + dayKey + '</th>'
-        })
-        Object.keys(s.val().users).forEach(function (userKey) {
-          console.log(userKey)
-          firebase.database().ref("users/" + userKey)
-            .once("value")
-            .then(function (userdata) {
-              tabelContent += '<tr>' +
-                '<td>' + index + '</td>' +
-                '<td>' + userdata.val().name + '</td>' +
-                '<td>' + insdata[userdata.val().company].name + '</td>'
-              Object.keys(s.val().attendence).forEach(function (dayKey) {
-                tabelContent += '<td>' + (s.val().attendence[dayKey][userKey] != undefined ? '<img src="' + s.val().attendence[dayKey][userKey].atteendSign +
-                  '" style="width: 75px;display:block"><p>' + s.val().attendence[dayKey][userKey].attendTime + ' </p>' : "لم يحضر") + '</td>'
-              })
-              tabelContent += '</tr>'
-              index++;
-            }).then(function () {
-              if (Object.keys(s.val().users).indexOf(userKey) == Object.keys(s.val().users).length - 1) {
-                $("#datatable-buttons thead tr").append(tabelHeader)
-                $("#datatable-buttons tbody").append(tabelContent)
-                $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
-                  dom: "Blfrtip",
-                  buttons: [
-                    {
-                      extend: 'print',
-                      exportOptions: {
-                        stripHtml: false,
-                        format: {
-                          body: function (inner, coldex, rowdex) {
-                            if (inner.length &= 0) return inner;
-                            var el = $.parseHTML(inner);
-                            var result = '';
-                            $.each(el, function (index, item) {
-                              if (item.nodeName == '#text') result = result + item.textContent;
-                              else if (item.nodeName == 'SUP') result = result + item.outerHTML;
-                              else if (item.nodeName == 'STRONG') result = result + item.outerHTML;
-                              else if (item.nodeName == 'IMG') result = result + item.outerHTML;
-                              else result = result + item.innerText;
-                            });
-                            return result;
-                          }
-                        }
-                      }
-                    },
-                    {
-                      extend: 'csv',
-                      exportOptions: {
-                        stripHtml: false,
-                        format: {
-                          body: function (inner, coldex, rowdex) {
-                            if (inner.length &= 0) return inner;
-                            var el = $.parseHTML(inner);
-                            var result = '';
-                            $.each(el, function (index, item) {
-                              if (item.nodeName == '#text') result = result + item.textContent;
-                              else if (item.nodeName == 'SUP') result = result + item.outerHTML;
-                              else if (item.nodeName == 'STRONG') result = result + item.outerHTML;
-                              else if (item.nodeName == 'IMG') result = result + item.src;
-                              else result = result + item.innerText;
-                            });
-                            return result;
-                          }
-                        }
-                      }
-                    },
-                  ],
-                  responsive: !0
-                })
-                $("#datatable-buttons").css("width", "100%")
-                $(".x_panel").css("display", "inline-block");
-              }
+        console.log(s.val())
+        if (s.val() != null) {
+          if (s.val().attendence != null) {
+            Object.keys(s.val().attendence).forEach(function (dayKey) {
+              tabelHeader += '<th class="center added">' + dayKey + '</th>'
             })
+            Object.keys(s.val().users).forEach(function (userKey) {
 
-        })
+              firebase.database().ref("users/" + userKey)
+                .once("value")
+                .then(function (userdata) {
+                  console.log(userKey)
+                  console.log(userdata.val())
+                  if (userdata.val() != null) {
+                    tabelContent += '<tr>' +
+                      '<td>' + index + '</td>' +
+                      '<td>' + userdata.val().name + '</td>' +
+                      '<td>' + insdata[userdata.val().company].name + '</td>'
+                    Object.keys(s.val().attendence).forEach(function (dayKey) {
+                      tabelContent += '<td>' + (s.val().attendence[dayKey][userKey] != undefined ? '<img src="' + s.val().attendence[dayKey][userKey].atteendSign +
+                        '" style="width: 75px;display:block"><p>' + s.val().attendence[dayKey][userKey].attendTime + ' </p>' : "لم يحضر") + '</td>'
+                    })
+                    tabelContent += '</tr>'
+                    index++;
+                  }
+                }).then(function () {
+                  if (Object.keys(s.val().users).indexOf(userKey) == Object.keys(s.val().users).length - 1) {
+                    $("#datatable-buttons thead tr").append(tabelHeader)
+                    $("#datatable-buttons tbody").append(tabelContent)
+                    $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+                      dom: "Blfrtip",
+                      buttons: [
+                        {
+                          extend: 'print',
+                          exportOptions: {
+                            stripHtml: false,
+                            format: {
+                              body: function (inner, coldex, rowdex) {
+                                if (inner.length &= 0) return inner;
+                                var el = $.parseHTML(inner);
+                                var result = '';
+                                $.each(el, function (index, item) {
+                                  if (item.nodeName == '#text') result = result + item.textContent;
+                                  else if (item.nodeName == 'SUP') result = result + item.outerHTML;
+                                  else if (item.nodeName == 'STRONG') result = result + item.outerHTML;
+                                  else if (item.nodeName == 'IMG') result = result + item.outerHTML;
+                                  else result = result + item.innerText;
+                                });
+                                return result;
+                              }
+                            }
+                          }
+                        },
+                        {
+                          extend: 'csv',
+                          exportOptions: {
+                            stripHtml: false,
+                            format: {
+                              body: function (inner, coldex, rowdex) {
+                                if (inner.length &= 0) return inner;
+                                var el = $.parseHTML(inner);
+                                var result = '';
+                                $.each(el, function (index, item) {
+                                  if (item.nodeName == '#text') result = result + item.textContent;
+                                  else if (item.nodeName == 'SUP') result = result + item.outerHTML;
+                                  else if (item.nodeName == 'STRONG') result = result + item.outerHTML;
+                                  else if (item.nodeName == 'IMG') result = result + item.src;
+                                  else result = result + item.innerText;
+                                });
+                                return result;
+                              }
+                            }
+                          }
+                        },
+                      ],
+                      responsive: !0
+                    })
+                    $("#datatable-buttons").css("width", "100%")
+                    $(".x_panel").css("display", "inline-block");
+                  }
+                })
+
+            })
+          }
+        }
 
       })
   })

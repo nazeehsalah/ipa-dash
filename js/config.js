@@ -6,5 +6,6 @@ var config = {
   projectId: "coursecenter-d86ee",
   storageBucket: "coursecenter-d86ee.appspot.com",
   messagingSenderId: "811950777253"
+
 };
 firebase.initializeApp(config);
