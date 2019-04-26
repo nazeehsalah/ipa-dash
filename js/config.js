@@ -7,5 +7,6 @@ var config = {
   storageBucket: "coursecenter-d86ee.appspot.com",
   messagingSenderId: "811950777253"
 
+
 };
 firebase.initializeApp(config);

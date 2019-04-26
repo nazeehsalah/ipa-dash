@@ -19,6 +19,7 @@ $(function () {
       });
       $("#datatable-buttons tbody").append(content)
       $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+        displayLength: 50,
         dom: "Blfrtip",
         buttons: [{
           extend: "copy",

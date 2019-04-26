@@ -69,6 +69,7 @@ $(function () {
                     $("#datatable-buttons thead tr").append(tabelHeader)
                     $("#datatable-buttons tbody").append(tabelContent)
                     $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+                      displayLength: 50,
                       dom: "Blfrtip",
                       buttons: [
                         {

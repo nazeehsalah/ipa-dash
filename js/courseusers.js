@@ -61,6 +61,7 @@ $(function () {
                 if (Object.keys(s.val().users).indexOf(userKey) == Object.keys(s.val().users).length - 1) {
                   $("#datatable-buttons tbody").append(tabelContent)
                   $("#datatable-buttons").length && $("#datatable-buttons").DataTable({
+                    displayLength: 50,
                     dom: "Blfrtip",
                     buttons: [
                       {
