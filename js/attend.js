@@ -42,7 +42,21 @@ $(function () {
         console.log(s.val())
         if (s.val() != null) {
           if (s.val().attendence != null) {
+            s.val().attendence;
+            var sortedAttendence=[];
             Object.keys(s.val().attendence).forEach(function (dayKey) {
+              sortedAttendence.push(new Date(dayKey));
+            })
+            sortedAttendence.sort((a,b)=>a.getTime()-b.getTime())
+            sortedAttendence.forEach(function (dayKey,i) {
+              //console.log(i)
+              dayKey=dayKey.toDateString()
+              //console.log(dayKey)
+              sortedAttendence[i]=dayKey
+            })
+            console.log(sortedAttendence)
+            sortedAttendence.forEach(function (dayKey) {
+              console.log(dayKey);
               tabelHeader += '<th class="center added">' + dayKey + '</th>'
             })
             Object.keys(s.val().users).forEach(function (userKey) {
@@ -50,16 +64,18 @@ $(function () {
               firebase.database().ref("users/" + userKey)
                 .once("value")
                 .then(function (userdata) {
-                  console.log(userKey)
-                  console.log(userdata.val())
+                  /* console.log(userKey)
+                  console.log(userdata.val()) */
                   if (userdata.val() != null) {
                     tabelContent += '<tr>' +
                       '<td>' + index + '</td>' +
                       '<td>' + userdata.val().name + '</td>' +
                       '<td>' + insdata[userdata.val().company].name + '</td>'
-                    Object.keys(s.val().attendence).forEach(function (dayKey) {
+                    sortedAttendence.forEach(function (dayKey) {
                       tabelContent += '<td>' + (s.val().attendence[dayKey][userKey] != undefined ? '<img src="' + s.val().attendence[dayKey][userKey].atteendSign +
-                        '" style="width: 75px;display:block"><p>' + s.val().attendence[dayKey][userKey].attendTime + ' </p>' : "لم يحضر") + '</td>'
+                        '" style="width: 75px;display:block">' : "لم يحضر") + '</td>'
+
+                        //<p>' + s.val().attendence[dayKey][userKey].attendTime + ' </p>
                     })
                     tabelContent += '</tr>'
                     index++;
